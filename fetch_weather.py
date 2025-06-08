@@ -1,6 +1,7 @@
-import requests
-import json
 import os
+import json
+import requests
+from dotenv import load_dotenv
 
 
 def save_weather_to_file(city, response):
@@ -15,7 +16,8 @@ def save_weather_to_file(city, response):
 
 
 def create_json_weather():
-    api_key = ""
+    load_dotenv()
+    api_key = os.getenv("WEATHER_API_KEY")
     cities = ['Tel Aviv', 'Jerusalem', 'Haifa', 'Ashdod']
 
     for city in cities:

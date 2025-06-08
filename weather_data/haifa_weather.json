@@ -5,38 +5,39 @@
   },
   "weather": [
     {
-      "id": 801,
-      "main": "Clouds",
-      "description": "few clouds",
-      "icon": "02d"
+      "id": 800,
+      "main": "Clear",
+      "description": "clear sky",
+      "icon": "01n"
     }
   ],
   "base": "stations",
   "main": {
-    "temp": 26.52,
-    "feels_like": 26.52,
-    "temp_min": 26.21,
-    "temp_max": 26.52,
-    "pressure": 1009,
-    "humidity": 65,
-    "sea_level": 1009,
+    "temp": 21.76,
+    "feels_like": 22.26,
+    "temp_min": 21.76,
+    "temp_max": 21.76,
+    "pressure": 1008,
+    "humidity": 87,
+    "sea_level": 1008,
     "grnd_level": 1002
   },
   "visibility": 10000,
   "wind": {
-    "speed": 5.14,
-    "deg": 290
+    "speed": 2.61,
+    "deg": 226,
+    "gust": 2.59
   },
   "clouds": {
-    "all": 20
+    "all": 0
   },
-  "dt": 1749385442,
+  "dt": 1749421617,
   "sys": {
-    "type": 1,
-    "id": 6853,
+    "type": 2,
+    "id": 2046556,
     "country": "IL",
-    "sunrise": 1749349901,
-    "sunset": 1749401206
+    "sunrise": 1749436295,
+    "sunset": 1749487634
   },
   "timezone": 10800,
   "id": 294801,
