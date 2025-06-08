@@ -1,0 +1,45 @@
+{
+  "coord": {
+    "lon": 34.9892,
+    "lat": 32.8156
+  },
+  "weather": [
+    {
+      "id": 801,
+      "main": "Clouds",
+      "description": "few clouds",
+      "icon": "02d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 26.52,
+    "feels_like": 26.52,
+    "temp_min": 26.21,
+    "temp_max": 26.52,
+    "pressure": 1009,
+    "humidity": 65,
+    "sea_level": 1009,
+    "grnd_level": 1002
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 5.14,
+    "deg": 290
+  },
+  "clouds": {
+    "all": 20
+  },
+  "dt": 1749385442,
+  "sys": {
+    "type": 1,
+    "id": 6853,
+    "country": "IL",
+    "sunrise": 1749349901,
+    "sunset": 1749401206
+  },
+  "timezone": 10800,
+  "id": 294801,
+  "name": "Haifa",
+  "cod": 200
+}
