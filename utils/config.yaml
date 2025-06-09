@@ -1,0 +1,12 @@
+s3:
+  bucket_name: my-weather-bucket
+  raw_prefix: raw-data/
+  processed_prefix: processed-data/
+
+api:
+  key: YOUR_API_KEY
+  base_url: https://api.weatherapi.com
+
+spark:
+  app_name: WeatherETL
+  master: local[*]

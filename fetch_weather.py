@@ -13,9 +13,11 @@ def save_weather_to_file(city, response):
 
     with open(file_path, 'w') as f:
         json.dump(response, f, indent=2)
+    return file_path
 
 
 def create_json_weather():
+    files_paths = []
     load_dotenv()
     api_key = os.getenv("WEATHER_API_KEY")
     cities = ['Tel Aviv', 'Jerusalem', 'Haifa', 'Ashdod']
@@ -23,7 +25,8 @@ def create_json_weather():
     for city in cities:
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
         response = requests.get(url).json()
-        save_weather_to_file(city, response)
+        files_paths.append(save_weather_to_file(city, response))
+    return files_paths
 
 
 if __name__ == '__main__':
