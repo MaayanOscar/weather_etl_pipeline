@@ -4,8 +4,8 @@ import requests
 from dotenv import load_dotenv
 
 
-def save_weather_to_file(city, response):
-    output_dir = os.path.join(os.path.dirname(__file__), 'weather_data')
+def save_weather_to_file(city, response, output_folder_name):
+    output_dir = os.path.join(os.path.dirname(__file__), output_folder_name)
     os.makedirs(output_dir, exist_ok=True)
 
     filename = f"{city.lower().replace(' ', '_')}_weather.json"
@@ -16,7 +16,7 @@ def save_weather_to_file(city, response):
     return file_path
 
 
-def create_json_weather():
+def create_json_weather(output_folder_name):
     files_paths = []
     load_dotenv()
     api_key = os.getenv("WEATHER_API_KEY")
@@ -25,7 +25,7 @@ def create_json_weather():
     for city in cities:
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
         response = requests.get(url).json()
-        files_paths.append(save_weather_to_file(city, response))
+        files_paths.append(save_weather_to_file(city, response, output_folder_name))
     return files_paths
 
 

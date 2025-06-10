@@ -1,7 +1,10 @@
+local_save:
+  folder_name: weather_data
+
 s3:
-  bucket_name: my-weather-bucket
-  raw_prefix: raw-data/
-  processed_prefix: processed-data/
+  bucket_name: weather-data-aws
+  raw_prefix: raw-data
+  processed_prefix: processed-data
 
 api:
   key: YOUR_API_KEY

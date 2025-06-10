@@ -14,30 +14,30 @@
   "base": "stations",
   "main": {
     "temp": 21.51,
-    "feels_like": 21.05,
+    "feels_like": 21.88,
     "temp_min": 21.51,
-    "temp_max": 22.59,
-    "pressure": 1010,
-    "humidity": 51,
-    "sea_level": 1010,
-    "grnd_level": 940
+    "temp_max": 24.26,
+    "pressure": 1007,
+    "humidity": 83,
+    "sea_level": 1007,
+    "grnd_level": 938
   },
   "visibility": 10000,
   "wind": {
-    "speed": 1.79,
-    "deg": 322,
+    "speed": 1.34,
+    "deg": 320,
     "gust": 3.58
   },
   "clouds": {
     "all": 0
   },
-  "dt": 1749500922,
+  "dt": 1749578282,
   "sys": {
     "type": 2,
     "id": 2004982,
     "country": "IL",
-    "sunrise": 1749436399,
-    "sunset": 1749487421
+    "sunrise": 1749522796,
+    "sunset": 1749573847
   },
   "timezone": 10800,
   "id": 281184,
