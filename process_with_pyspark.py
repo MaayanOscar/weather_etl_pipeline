@@ -19,12 +19,35 @@ def define_spark():
 
 def process_data(files_paths_s3):
     final_dfs = {}
+    # spark = SparkSession.builder \
+    #     .appName("S3Uploader") \
+    #     .master("local[*]") \
+    #     .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
+    #     .config("spark.hadoop.fs.s3a.aws.credentials.provider", "com.amazonaws.auth.DefaultAWSCredentialsProviderChain") \
+    #     .config("spark.hadoop.io.native.lib.available", "false").getOrCreate()
+    # from pyspark.sql import SparkSession
+
     spark = SparkSession.builder \
-        .appName("ReadFromS3") \
+        .appName("S3Uploader") \
         .master("local[*]") \
         .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
         .config("spark.hadoop.fs.s3a.aws.credentials.provider", "com.amazonaws.auth.DefaultAWSCredentialsProviderChain") \
-        .getOrCreate()
+        .config("spark.hadoop.io.native.lib.available", "false") \
+        .config("spark.local.dir", r"C:\tmp\hadoop-שירז").getOrCreate()
+
+    # spark = SparkSession.builder \
+    #     .appName("ReadFromS3") \
+    #     .master("local[*]") \
+    #     .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
+    #     .config("spark.hadoop.fs.s3a.aws.credentials.provider", "com.amazonaws.auth.DefaultAWSCredentialsProviderChain") \
+    #     .getOrCreate()
+    # spark = SparkSession.builder \
+    #     .appName("ReadFromS3") \
+    #     .master("local[*]") \
+    #     .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
+    #     .config("spark.hadoop.fs.s3a.aws.credentials.provider", "com.amazonaws.auth.DefaultAWSCredentialsProviderChain") \
+    #     .config("spark.hadoop.io.native.lib.available", "false") \
+    #     .getOrCreate()
 
     for file in files_paths_s3:
         file_name = os.path.splitext(os.path.basename(file))[0]
@@ -55,8 +78,8 @@ def process_data(files_paths_s3):
             # col("main.pressure"),
             # col("wind.speed").alias("wind_speed"),
             # col("wind.deg").alias("wind_deg"),
-            col("clouds.all").alias("clouds"),
-            col("temp_range")
+            col("clouds.all").alias("clouds")
+            # col("temp_range")
             # col("weather")[0]["main"].alias("weather_main"),
             # col("weather")[0]["description"].alias("weather_description")
         )

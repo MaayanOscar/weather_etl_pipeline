@@ -25,7 +25,10 @@ def dfs_to_s3(upload_dfs, bucket_name, processed_prefix):
     for file_name, df in upload_dfs.items():
         # "s3a://your-bucket-name/processed/"
         output_path = f"s3a://{bucket_name}/{processed_prefix}/{todays_date}/"
-        df.coalesce(1).write.option("header", True).mode("overwrite").csv(f"{output_path}{file_name}/")
+        # df.coalesce(1).write.option("header", True).mode("overwrite").csv(f"{output_path}{file_name}/")
+        # df.write.csv(f"{output_path}{file_name}/", header=True)
+        df.write.mode("overwrite").csv(f"{output_path}{file_name}/", header=True)
+        print(f'upload {file_name} CSV')
         # df.write.mode("overwrite").csv(ou)
 
 
