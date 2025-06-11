@@ -7,10 +7,10 @@ from utils.load_config import load_config
 def main():
     config = load_config()
     print(config)
-    files_paths = create_json_weather(config['local_save']['folder_name'])
-    files_paths_s3 = jsons_to_s3(files_paths, config['s3']['bucket_name'], config['s3']['raw_prefix'])
+    files_paths = create_json_weather(config)
+    files_paths_s3 = jsons_to_s3(files_paths, config)
     print(files_paths_s3)
-    process_weather_data(files_paths_s3, config['s3']['bucket_name'], config['s3']['processed_prefix'])
+    process_weather_data(files_paths_s3, config)
 
 
 if __name__ == '__main__':

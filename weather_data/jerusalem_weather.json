@@ -8,36 +8,36 @@
       "id": 800,
       "main": "Clear",
       "description": "clear sky",
-      "icon": "01n"
+      "icon": "01d"
     }
   ],
   "base": "stations",
   "main": {
-    "temp": 21.51,
-    "feels_like": 21.91,
-    "temp_min": 21.51,
-    "temp_max": 23.15,
-    "pressure": 1008,
-    "humidity": 84,
-    "sea_level": 1008,
+    "temp": 30.4,
+    "feels_like": 30.16,
+    "temp_min": 30.4,
+    "temp_max": 30.4,
+    "pressure": 1007,
+    "humidity": 40,
+    "sea_level": 1007,
     "grnd_level": 938
   },
   "visibility": 10000,
   "wind": {
-    "speed": 0.89,
-    "deg": 319,
-    "gust": 3.58
+    "speed": 3.58,
+    "deg": 303,
+    "gust": 8.05
   },
   "clouds": {
     "all": 0
   },
-  "dt": 1749580433,
+  "dt": 1749644581,
   "sys": {
     "type": 2,
     "id": 2004982,
     "country": "IL",
-    "sunrise": 1749522796,
-    "sunset": 1749573847
+    "sunrise": 1749609194,
+    "sunset": 1749660272
   },
   "timezone": 10800,
   "id": 281184,

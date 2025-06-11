@@ -1,3 +1,13 @@
+general:
+  cities:
+    - Tel Aviv
+    - Jerusalem
+    - Haifa
+    - Beersheba
+    - Eilat
+
+
+
 local_save:
   folder_name: weather_data
 
@@ -5,11 +15,11 @@ s3:
   bucket_name: weather-data-aws
   raw_prefix: raw-data
   processed_prefix: processed-data
+  summaries_prefix: summaries
 
 api:
-  key: YOUR_API_KEY
-  base_url: https://api.weatherapi.com
+  base_url: http://api.openweathermap.org
 
-spark:
-  app_name: WeatherETL
-  master: local[*]
+#spark:
+#  app_name: WeatherETL
+#  master: local[*]
