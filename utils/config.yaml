@@ -6,8 +6,6 @@ general:
     - Beersheba
     - Eilat
 
-
-
 local_save:
   folder_name: weather_data
 
@@ -19,7 +17,3 @@ s3:
 
 api:
   base_url: http://api.openweathermap.org
-
-#spark:
-#  app_name: WeatherETL
-#  master: local[*]

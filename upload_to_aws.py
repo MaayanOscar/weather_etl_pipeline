@@ -10,9 +10,6 @@ def jsons_to_s3(files_paths, config):
     bucket_name = config['s3']['bucket_name']
     s3 = boto3.client('s3')
 
-    # files_dir = os.path.join(os.path.dirname(__file__), 'weather_data')
-    # files = [f for f in os.listdir(files_dir) if os.path.isfile(os.path.join(files_dir, f))]
-
     todays_date = datetime.today().strftime('%Y-%m-%d')
 
     for file in files_paths:
@@ -22,26 +19,8 @@ def jsons_to_s3(files_paths, config):
     return files_paths_s3
 
 
-# def dfs_to_s3(upload_dfs, bucket_name, processed_prefix):
-#     todays_date = datetime.today().strftime('%Y-%m-%d')
-#
-#     for file_name, df in upload_dfs.items():
-#         # "s3a://your-bucket-name/processed/"
-#         output_path = f"s3a://{bucket_name}/{processed_prefix}/{todays_date}/"
-#         # df.coalesce(1).write.option("header", True).mode("overwrite").csv(f"{output_path}{file_name}/")
-#         # df.write.csv(f"{output_path}{file_name}/", header=True)
-#         df.write.mode("overwrite").csv(f"{output_path}{file_name}/", header=True)
-#         print(f'upload {file_name} CSV')
-#         # df.write.mode("overwrite").csv(ou)
 def dfs_to_s3(upload_dfs, bucket_name, processed_prefix):
     todays_date = datetime.today().strftime('%Y-%m-%d')
-
-    # for file_name, df in upload_dfs.items():
-    #     output_path = f"s3a://{bucket_name}/{processed_prefix}/{todays_date}"
-    #     # df.write.mode("overwrite").parquet(output_path)
-    #     # df.coalesce(1).write.mode("overwrite").parquet(output_path)
-    #     df.write.mode("overwrite").parquet(f'{output_path}/{file_name}.parquet')
-    #     print(f'Uploaded {file_name} as Parquet')
 
     for file_name, df in upload_dfs.items():
         output_path = f"s3a://{bucket_name}/{processed_prefix}/{todays_date}/{file_name}"
