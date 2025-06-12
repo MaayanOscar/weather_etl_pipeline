@@ -1,29 +1,50 @@
 import os
+import boto3
 import webbrowser
+import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 from datetime import datetime
 from upload_to_aws import dashboard_to_s3
 
 
-def show_dashboard(final_dfs, summary_text, config):
+def show_dashboard(final_df, summary_text, config):
+    '''
+    Generates and displays a weather dashboard both in Streamlit and as an HTML file,
+    then uploads the HTML dashboard to S3 and automatically opens it in the default web browser.
+
+    :param final_df: A dictionary where keys are city names and values are Spark DataFrames.
+                      containing the processed weather data per city.
+    :param summary_text: weather summary text to be displayed in the dashboard.
+    :param config: Configuration dictionary loaded from YAML.
+    :return: None
+    '''
+
     todays_date = datetime.today().strftime('%d-%m-%Y')
 
-    # Streamlit UI
+    # Streamlit UI rendering
     st.set_page_config(page_title="Weather Dashboard", layout="wide")
     st.title("Daily Weather Dashboard")
     st.markdown(f"#### Date: {todays_date}")
     st.markdown(f"### Summary:\n{summary_text}")
 
-    for city, df in final_dfs.items():
+    for df_name, df in final_df.items():
         pdf = df.toPandas()
-        st.subheader(f"{city.capitalize()}")
+        st.subheader(f"{df_name.capitalize()}")
         st.dataframe(pdf)
 
-    html_path = os.path.join(os.path.dirname(__file__), os.path.join(config['local_save']['folder_name'], "weather_dashboard.html"))
+    # create local save path
+    output_folder_name = config['local_save']['output_folder_name']
+    output_dir = os.path.join(os.path.dirname(__file__), output_folder_name)
+    os.makedirs(output_dir, exist_ok=True)
+    html_path = os.path.join(output_dir, "weather_dashboard.html")
 
-    unique_cities = list(final_dfs.values())[0].toPandas()['city'].unique()
-    city_options_html = "<option value='all'>All cities</option>" + ''.join([f"<option value='{city}'>{city.capitalize()}</option>" for city in unique_cities])
+    # Generate city dropdown options for HTML
+    unique_cities = list(final_df.values())[0].toPandas()['city'].unique()
+    city_options_html = "<option value='all'>All cities</option>" + ''.join([
+        f"<option value='{city}'>{city.capitalize()}</option>" for city in unique_cities])
 
+    # Build the HTML content for the dashboard
     html_content = f"""
     <html>
     <head>
@@ -50,9 +71,7 @@ def show_dashboard(final_dfs, summary_text, config):
                 white-space: pre-wrap;
                 text-align: left;
             }}
-            hr {{
-                margin-bottom: 5px;
-            }}
+            hr {{ margin-bottom: 5px; }}
             .city-table {{
                 margin-top: 20px;
                 background-color: rgba(255,255,255,0.95);
@@ -69,9 +88,7 @@ def show_dashboard(final_dfs, summary_text, config):
                 border: 1px solid #ccc;
                 text-align: center;
             }}
-            th {{
-                background-color: #f0f8ff;
-            }}
+            th {{ background-color: #f0f8ff; }}
             td.city-name {{
                 font-weight: bold;
                 font-size: 18px;
@@ -87,16 +104,14 @@ def show_dashboard(final_dfs, summary_text, config):
                 border: 1px solid #ccc;
                 border-radius: 8px;
                 color: #333;
-                outline: none;
-                box-shadow: none;
             }}
-            /* הסרת כל קווי מתאר וצללים בזמן פוקוס */
             *:focus {{
                 outline: none !important;
                 box-shadow: none !important;
             }}
         </style>
         <script>
+            // Filter displayed rows based on selected city
             function filterCityRows() {{
                 const selected = document.getElementById("city-dropdown").value.toLowerCase();
                 const rows = document.querySelectorAll(".city-table table tbody tr");
@@ -114,26 +129,29 @@ def show_dashboard(final_dfs, summary_text, config):
         <h2>📅 Date: {todays_date}</h2>
         <pre>{summary_text}</pre>
         <hr>
-
         <select id="city-dropdown" onchange="filterCityRows()">
             {city_options_html}
         </select>
     """
 
-    for city, df in final_dfs.items():
+    # Add all cities table to the HTML
+    for df_name, df in final_df.items():
         pdf = df.toPandas()
-        html_content += f"<div class='city-table'><h3>{city.capitalize()}</h3>"
+        html_content += f"<div class='city-table'><h3>{df_name.capitalize()}</h3>"
         html_content += pdf.rename(columns=lambda x: x.replace('_', ' ')).to_html(index=False, border=0)
         html_content += "</div><br>"
 
     html_content += "</body></html>"
 
-    # Save HTML
+    # Save the dashboard as HTML file
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html_content)
 
-    # Upload to S3
-    dashboard_to_s3(html_path, config['s3']['bucket_name'], f"{config['s3']['summaries_prefix']}/{todays_date}/{os.path.basename(html_path)}")
+    # Upload the HTML file to S3
+    dashboard_to_s3(
+        html_path,
+        config['s3']['bucket_name'],
+        f"{config['s3']['summaries_prefix']}/{todays_date}/{os.path.basename(html_path)}")
 
-    # Open locally
+    # Open the dashboard locally in the browser
     webbrowser.open(f"file://{os.path.abspath(html_path)}")
