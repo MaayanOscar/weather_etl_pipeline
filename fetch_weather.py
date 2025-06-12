@@ -28,7 +28,3 @@ def create_json_weather(config):
         response = requests.get(url).json()
         files_paths.append(save_weather_to_file(city, response, output_folder_name))
     return files_paths
-
-
-if __name__ == '__main__':
-    create_json_weather()

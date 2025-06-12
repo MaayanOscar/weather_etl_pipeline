@@ -10,7 +10,7 @@ def jsons_to_s3(files_paths, config):
     bucket_name = config['s3']['bucket_name']
     s3 = boto3.client('s3')
 
-    todays_date = datetime.today().strftime('%Y-%m-%d')
+    todays_date = datetime.today().strftime('%d-%m-%Y')
 
     for file in files_paths:
         key = f"{raw_prefix}/{todays_date}/{os.path.basename(file)}"
@@ -20,7 +20,7 @@ def jsons_to_s3(files_paths, config):
 
 
 def dfs_to_s3(upload_dfs, bucket_name, processed_prefix):
-    todays_date = datetime.today().strftime('%Y-%m-%d')
+    todays_date = datetime.today().strftime('%d-%m-%Y')
 
     for file_name, df in upload_dfs.items():
         output_path = f"s3a://{bucket_name}/{processed_prefix}/{todays_date}/{file_name}"
@@ -31,7 +31,7 @@ def dfs_to_s3(upload_dfs, bucket_name, processed_prefix):
 def txt_to_s3(summary_text, summery_df, bucket_name, summaries_prefix, output_folder_name):
     access_key = os.getenv("AWS_ACCESS_KEY_ID")
     secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
-    todays_date = datetime.today().strftime('%Y-%m-%d')
+    todays_date = datetime.today().strftime('%d-%m-%Y')
     summary_file_path = f"{summaries_prefix}/{todays_date}"
     output_dir = os.path.join(os.path.dirname(__file__), output_folder_name)
 
@@ -49,5 +49,11 @@ def txt_to_s3(summary_text, summery_df, bucket_name, summaries_prefix, output_fo
     print(f'Uploaded weather_summary to {output_path}')
 
 
-if __name__ == '__main__':
-    jsons_to_s3()
+def dashboard_to_s3(local_path, bucket_name, s3_key):
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+        aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY")
+    )
+    s3.upload_file(local_path, bucket_name, s3_key)
+    print(f"Dashboard uploaded to s3://{bucket_name}/{s3_key}")
