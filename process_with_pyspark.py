@@ -123,10 +123,10 @@ def process_data(files_paths_s3, spark):
     # Create weather summary string
     summary_text = f"""Weather Summary – Today
 
-🔥 Hottest city: {hottest['city']} (temp: {hottest['temp']}°C)
-❄️ Coldest city: {coldest['city']} (temp: {coldest['temp']}°C)
-💧 Most humid city: {most_humid['city']} (humidity: {most_humid['humidity']}%)
-⛅ Cloudiest city: {cloudiest['city']} (clouds: {cloudiest['clouds']}%)
+Hottest city: {hottest['city']} (temp: {hottest['temp']}°C)
+Coldest city: {coldest['city']} (temp: {coldest['temp']}°C)
+Most humid city: {most_humid['city']} (humidity: {most_humid['humidity']}%)
+Cloudiest city: {cloudiest['city']} (clouds: {cloudiest['clouds']}%)
 
 Average temperature: {avg_temp}°C | Average humidity: {avg_humidity}%
 """

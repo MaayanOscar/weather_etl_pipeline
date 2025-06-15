@@ -125,8 +125,8 @@ def show_dashboard(final_df, summary_text, config):
         </script>
     </head>
     <body>
-        <h1>☀️ Daily Weather Dashboard</h1>
-        <h2>📅 Date: {todays_date}</h2>
+        <h1> Daily Weather Dashboard</h1>
+        <h2> Date: {todays_date}</h2>
         <pre>{summary_text}</pre>
         <hr>
         <select id="city-dropdown" onchange="filterCityRows()">
