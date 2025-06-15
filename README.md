@@ -65,6 +65,18 @@ This will download weather data, process it, and open a dashboard in your browse
 
 ---
 
+## Dashboard Examples
+
+Here are screenshots of the dashboard output:
+
+### All cities
+![All Cities Dashboard](docs/dashboard_all_cities.png)
+
+### Jerusalem only
+![Jerusalem Dashboard](docs/dashboard_jerusalem_only.png)
+
+---
+
 ## Tech Stack
 
 - Python
