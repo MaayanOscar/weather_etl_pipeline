@@ -14,7 +14,7 @@ def define_spark():
     :return: SparkSession object with AWS.
     '''
 
-    # Load AWS credentials from .env file
+    # Load AWS credentials from environment
     access_key = os.getenv("AWS_ACCESS_KEY_ID")
     secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
 

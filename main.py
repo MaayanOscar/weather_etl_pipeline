@@ -6,7 +6,7 @@ from weather_dashboard import show_dashboard
 
 
 def main():
-    """
+    '''
     Executes the complete ETL pipeline for weather data collection, processing, and visualization.
 
     Workflow:
@@ -17,9 +17,8 @@ def main():
     5. Upload the processed data and a summary report to S3.
     6. Generate and display an interactive dashboard with Streamlit and create an HTML version, which is also uploaded to S3.
 
-    Returns:
-        None
-    """
+    :return: None
+    '''
 
     config = load_config()
 

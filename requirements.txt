@@ -1,0 +1,7 @@
+requests
+boto3
+pyspark
+streamlit
+python-dotenv
+pyyaml
+pandas
